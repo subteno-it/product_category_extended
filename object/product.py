@@ -31,7 +31,7 @@ class product_category(osv.osv):
         'sale_taxes_ids': fields.many2many('account.tax', 'product_cat_tax_cust_rel',
             'cat_id', 'tax_id', 'Sales Taxes',
             domain=[('parent_id','=',False),('type_tax_use','in',['sale','all'])]),
-        'purchase_taxes_id': fields.many2many('account.tax', 'product_cat_tax_supp_rel',
+        'purchase_taxes_ids': fields.many2many('account.tax', 'product_cat_tax_supp_rel',
             'cat_id', 'tax_id', 'Purchase Taxes',
             domain=[('parent_id', '=', False),('type_tax_use','in',['purchase','all'])]),
     }
