@@ -1,0 +1,48 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# * product_category_extended
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 5.0.1\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2009-08-29 22:40:10+0000\n"
+"PO-Revision-Date: 2009-08-30 12:47+0100\n"
+"Last-Translator: Christophe Chauvet <christophe.chauvet@syleam.fr>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 1.1.1\n"
+
+#. module: product_category_extended
+#: field:product.category,sale_taxes_ids:0
+msgid "Sales Taxes"
+msgstr "Taxes de ventes"
+
+#. module: product_category_extended
+#: model:ir.module.module,description:product_category_extended.module_meta_information
+msgid ""
+"\n"
+"    Add On Change on product category to:\n"
+"    * Fill sales and purchase taxes on product.\n"
+"    * Add default UOM on product\n"
+"    "
+msgstr ""
+"\n"
+"   Ajoute un déclencheur lors de la sélection de la catégorie de produits qui:   * Remplis les taxes de ventes et d'achats/   * Ajout les unités principales par défaut."
+
+#. module: product_category_extended
+#: field:product.category,purchase_taxes_ids:0
+msgid "Purchase Taxes"
+msgstr "Taxes d'achat"
+
+#. module: product_category_extended
+#: constraint:ir.ui.view:0
+msgid "Invalid XML for View Architecture!"
+msgstr "Formulaire XML invalide pour ce type de vue"
+
+#. module: product_category_extended
+#: model:ir.module.module,shortdesc:product_category_extended.module_meta_information
+msgid "Product Category Extended"
+msgstr "Extension de la catégorie de produit"
+
