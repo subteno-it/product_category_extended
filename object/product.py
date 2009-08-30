@@ -64,7 +64,6 @@ class product_product(osv.osv):
         else:
             # Search default value on this category
             categ = self.pool.get('product.category').read(cr, uid, [category])[0]
-            print repr(categ)
             res['categ_id'] =  category
             if categ['sale_taxes_ids']:
                 res['taxes_id'] = categ['sale_taxes_ids']
@@ -83,7 +82,6 @@ class product_product(osv.osv):
 * Sales and Purchases Taxes
 * Unit sales and stock
 * The price with return unit""")
-        print 'Categ_id: %d' % category
         return {'value': res, 'warning': warn}
 
 product_product()
