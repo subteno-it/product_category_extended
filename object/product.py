@@ -54,13 +54,13 @@ class product_product(osv.osv):
         * Product Type
         """
         if not context: context = {}
-        res = {}
 
+        res = {}
+        warn = False
         if not category:
             res['categ_id'] = res['uom_id'] = res['uom_po_id'] = False
             res['supplier_taxes_id'] = []
             res['taxes_id'] = []
-            warn = False
         else:
             # Search default value on this category
             categ = self.pool.get('product.category').read(cr, uid, [category])[0]
@@ -76,9 +76,10 @@ class product_product(osv.osv):
             if categ['uos_id']:
                 res['uos_id'] = categ['uos_id']
                 res['uos_coeff'] = categ['uos_coeff']
-            warn = {}
-            warn['title'] = _('Caution')
-            warn['message'] = _("""The product category have been changed, thanks to control
+            if ids:
+                warn = {}
+                warn['title'] = _('Caution')
+                warn['message'] = _("""The product category have been changed, thanks to control
 * Sales and Purchases Taxes
 * Unit sales and stock
 * The price with return unit""")
