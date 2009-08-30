@@ -23,6 +23,7 @@
 
 from osv import osv
 from osv import fields
+from tools.translate import _
 
 class product_category(osv.osv):
     _inherit = 'product.category'
@@ -34,6 +35,10 @@ class product_category(osv.osv):
         'purchase_taxes_ids': fields.many2many('account.tax', 'product_cat_tax_supp_rel',
             'cat_id', 'tax_id', 'Purchase Taxes',
             domain=[('parent_id', '=', False),('type_tax_use','in',['purchase','all'])]),
+        'uom_id': fields.many2one('product.uom', 'Default UoM'),
+        'uom_po_id': fields.many2one('product.uom', 'Purchase UoM'),
+        'uos_id': fields.many2one('product.uom', 'Unit of Sale', help="See product definition"),
+        'uos_coeff': fields.float('UOM -> UOS Coeff', digits=(16,4), help="See product definition"),
     }
 
 product_category()
@@ -55,13 +60,31 @@ class product_product(osv.osv):
             res['categ_id'] = res['uom_id'] = res['uom_po_id'] = False
             res['supplier_taxes_id'] = []
             res['taxes_id'] = []
+            warn = False
         else:
+            # Search default value on this category
+            categ = self.pool.get('product.category').read(cr, uid, [category])[0]
+            print repr(categ)
             res['categ_id'] =  category
-
-
+            if categ['sale_taxes_ids']:
+                res['taxes_id'] = categ['sale_taxes_ids']
+            if categ['purchase_taxes_ids']:
+                res['supplier_taxes_id'] = categ['purchase_taxes_ids']
+            if categ['uom_id']:
+                res['uom_id'] = categ['uom_id']
+            if categ['uom_po_id']:
+                res['uom_po_id'] = categ['uom_po_id']
+            if categ['uos_id']:
+                res['uos_id'] = categ['uos_id']
+                res['uos_coeff'] = categ['uos_coeff']
+            warn = {}
+            warn['title'] = _('Caution')
+            warn['message'] = _("""The product category have been changed, thanks to control
+* Sales and Purchases Taxes
+* Unit sales and stock
+* The price with return unit""")
         print 'Categ_id: %d' % category
-
-        return {'value': res}
+        return {'value': res, 'warning': warn}
 
 product_product()
 

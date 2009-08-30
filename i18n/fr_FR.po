@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.1\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2009-08-29 22:40:10+0000\n"
-"PO-Revision-Date: 2009-08-30 12:47+0100\n"
+"POT-Creation-Date: 2009-08-30 14:55:17+0000\n"
+"PO-Revision-Date: 2009-08-30 16:57+0100\n"
 "Last-Translator: Christophe Chauvet <christophe.chauvet@syleam.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,9 +15,34 @@ msgstr ""
 "X-Generator: Translate Toolkit 1.1.1\n"
 
 #. module: product_category_extended
-#: field:product.category,sale_taxes_ids:0
-msgid "Sales Taxes"
-msgstr "Taxes de ventes"
+#: view:product.category:0
+msgid "Information"
+msgstr "Information"
+
+#. module: product_category_extended
+#: constraint:ir.ui.view:0
+msgid "Invalid XML for View Architecture!"
+msgstr "Formulaire XML invalide pour ce type de vue"
+
+#. module: product_category_extended
+#: field:product.category,uos_id:0
+msgid "Unit of Sale"
+msgstr "Unité de vente"
+
+#. module: product_category_extended
+#: field:product.category,purchase_taxes_ids:0
+msgid "Purchase Taxes"
+msgstr "Taxes d'achat"
+
+#. module: product_category_extended
+#: field:product.category,uom_po_id:0
+msgid "Purchase UoM"
+msgstr "Unité d'achat"
+
+#. module: product_category_extended
+#: view:product.category:0
+msgid "Secondary Unit (UoS)"
+msgstr "Unité secondaire (US)"
 
 #. module: product_category_extended
 #: model:ir.module.module,description:product_category_extended.module_meta_information
@@ -29,17 +54,51 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"   Ajoute un déclencheur lors de la sélection de la catégorie de produits qui:   * Remplis les taxes de ventes et d'achats/   * Ajout les unités principales par défaut."
+"   Ajoute un déclencheur lors de la sélection de la catégorie de produits qui:\n"
+"   * Remplis les taxes de ventes et d'achats\n"
+"   * Ajout les unités principales par défaut.\n"
+"   "
 
 #. module: product_category_extended
-#: field:product.category,purchase_taxes_ids:0
-msgid "Purchase Taxes"
-msgstr "Taxes d'achat"
+#: view:product.category:0
+msgid "Sales taxes"
+msgstr "Taxes de ventes"
 
 #. module: product_category_extended
-#: constraint:ir.ui.view:0
-msgid "Invalid XML for View Architecture!"
-msgstr "Formulaire XML invalide pour ce type de vue"
+#: view:product.category:0
+msgid "Purchases taxes"
+msgstr "Taxes d'achats"
+
+#. module: product_category_extended
+#: field:product.category,uom_id:0
+msgid "Default UoM"
+msgstr "Unité par défaut"
+
+#. module: product_category_extended
+#: view:product.category:0
+msgid "General"
+msgstr "Génral"
+
+#. module: product_category_extended
+#: view:product.category:0
+msgid "Sale and Purchase Unit (UoM)"
+msgstr "Unité de vente et d'achat (UP)"
+
+#. module: product_category_extended
+#: help:product.category,uos_coeff:0
+#: help:product.category,uos_id:0
+msgid "See product definition"
+msgstr "Voir sur la définition de produit"
+
+#. module: product_category_extended
+#: field:product.category,uos_coeff:0
+msgid "UOM -> UOS Coeff"
+msgstr "Coeff UOM -> UOS "
+
+#. module: product_category_extended
+#: field:product.category,sale_taxes_ids:0
+msgid "Sales Taxes"
+msgstr "Taxes de ventes"
 
 #. module: product_category_extended
 #: model:ir.module.module,shortdesc:product_category_extended.module_meta_information

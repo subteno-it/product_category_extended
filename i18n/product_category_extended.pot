@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.1\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2009-08-30 10:45:14+0000\n"
-"PO-Revision-Date: 2009-08-30 10:45:14+0000\n"
+"POT-Creation-Date: 2009-08-30 14:55:17+0000\n"
+"PO-Revision-Date: 2009-08-30 14:55:17+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_category_extended
+#: view:product.category:0
+msgid "Information"
+msgstr ""
+
+#. module: product_category_extended
 #: constraint:ir.ui.view:0
 msgid "Invalid XML for View Architecture!"
+msgstr ""
+
+#. module: product_category_extended
+#: field:product.category,uos_id:0
+msgid "Unit of Sale"
 msgstr ""
 
 #. module: product_category_extended
@@ -26,8 +36,13 @@ msgid "Purchase Taxes"
 msgstr ""
 
 #. module: product_category_extended
-#: field:product.category,sale_taxes_ids:0
-msgid "Sales Taxes"
+#: field:product.category,uom_po_id:0
+msgid "Purchase UoM"
+msgstr ""
+
+#. module: product_category_extended
+#: view:product.category:0
+msgid "Secondary Unit (UoS)"
 msgstr ""
 
 #. module: product_category_extended
@@ -41,12 +56,43 @@ msgstr ""
 
 #. module: product_category_extended
 #: view:product.category:0
-msgid "Purchases taxes"
+msgid "Sales taxes"
 msgstr ""
 
 #. module: product_category_extended
 #: view:product.category:0
-msgid "Sales taxes"
+msgid "Purchases taxes"
+msgstr ""
+
+#. module: product_category_extended
+#: field:product.category,uom_id:0
+msgid "Default UoM"
+msgstr ""
+
+#. module: product_category_extended
+#: view:product.category:0
+msgid "General"
+msgstr ""
+
+#. module: product_category_extended
+#: view:product.category:0
+msgid "Sale and Purchase Unit (UoM)"
+msgstr ""
+
+#. module: product_category_extended
+#: help:product.category,uos_coeff:0
+#: help:product.category,uos_id:0
+msgid "See product definition"
+msgstr ""
+
+#. module: product_category_extended
+#: field:product.category,uos_coeff:0
+msgid "UOM -> UOS Coeff"
+msgstr ""
+
+#. module: product_category_extended
+#: field:product.category,sale_taxes_ids:0
+msgid "Sales Taxes"
 msgstr ""
 
 #. module: product_category_extended

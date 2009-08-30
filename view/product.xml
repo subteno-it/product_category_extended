@@ -34,8 +34,16 @@
             <field name="priority" eval="10"/>
             <field name="inherit_id" ref="product.product_category_form_view"/>
             <field name="arch" type="xml">
-                <xpath expr="/form" position="inside">
+                <xpath expr="/form/field[@name='sequence']" position="replace">
                     <notebook colspan="4">
+                        <page string="General">
+                            <group colspan="4">
+                                <separator string="Information" colspan="4"/>
+                                <group col="2" colspan="2">
+                                    <field name="sequence" colspan="2"/>
+                                </group>
+                            </group>
+                        </page>
                     </notebook>
                 </xpath>
             </field>
@@ -108,5 +116,31 @@
 
             </field>
         </record>
+
+
+        <record id="view_product_category_extended2_form" model="ir.ui.view">
+            <field name="name">product.category.extended 2 - Form</field>
+            <field name="model">product.category</field>
+            <field name="type">form</field>
+            <field name="priority" eval="20"/>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="/form/notebook/page[@string='General']" position="inside">
+                    <group col="2" colspan="2">
+                        <separator string="Sale and Purchase Unit (UoM)" colspan="2"/>
+                        <field name="uom_id" colspan="2"/>
+                        <field name="uom_po_id" colspan="2"/>
+                    </group>
+                    <group col="2" colspan="2">
+                        <separator string="Secondary Unit (UoS)" colspan="2"/> 
+                        <field name="uos_id" colspan="2"/>
+                        <field name="uos_coeff" colspan="2"/>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+
     </data>
 </openerp>
