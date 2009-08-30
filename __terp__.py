@@ -22,8 +22,8 @@
 ##############################################################################
 
 {
-    'name': 'Product Tax Category',
-    'version': '0.1',
+    'name': 'Product Category Extended',
+    'version': '0.1.a',
     'category': 'Custom',
     'description': """
     Add On Change on product category to:
