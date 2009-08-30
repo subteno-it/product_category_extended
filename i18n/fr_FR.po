@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.1\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2009-08-30 14:55:17+0000\n"
-"PO-Revision-Date: 2009-08-30 16:57+0100\n"
+"PO-Revision-Date: 2009-08-30 17:05+0100\n"
 "Last-Translator: Christophe Chauvet <christophe.chauvet@syleam.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr "Formulaire XML invalide pour ce type de vue"
 #. module: product_category_extended
 #: field:product.category,uos_id:0
 msgid "Unit of Sale"
-msgstr "Unité de vente"
+msgstr "Unité secondaire"
 
 #. module: product_category_extended
 #: field:product.category,purchase_taxes_ids:0
