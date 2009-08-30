@@ -33,6 +33,7 @@
     'author': 'Syleam',
     'depends': [
         'product',
+        'stock',
         'account',
     ],
     'init_xml': [],
