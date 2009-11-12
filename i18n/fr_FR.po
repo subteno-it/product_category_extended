@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.1\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2009-08-30 14:55:17+0000\n"
-"PO-Revision-Date: 2009-08-30 17:05+0100\n"
+"POT-Creation-Date: 2009-11-12 17:15:51+0000\n"
+"PO-Revision-Date: 2009-11-12 18:17+0100\n"
 "Last-Translator: Christophe Chauvet <christophe.chauvet@syleam.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -85,6 +85,12 @@ msgid "Sale and Purchase Unit (UoM)"
 msgstr "Unité de vente et d'achat (UP)"
 
 #. module: product_category_extended
+#: code:addons/product_category_extended/object/product.py:0
+#, python-format
+msgid "Caution"
+msgstr "Attention"
+
+#. module: product_category_extended
 #: help:product.category,uos_coeff:0
 #: help:product.category,uos_id:0
 msgid "See product definition"
@@ -94,6 +100,16 @@ msgstr "Voir sur la définition de produit"
 #: field:product.category,uos_coeff:0
 msgid "UOM -> UOS Coeff"
 msgstr "Coeff UOM -> UOS "
+
+#. module: product_category_extended
+#: code:addons/product_category_extended/object/product.py:0
+#, python-format
+msgid ""
+"\"\"The product category have been changed, thanks to control\n"
+"* Sales and Purchases Taxes\n"
+"* Unit sales and stock\n"
+"* The price with return unit\"\""
+msgstr ""
 
 #. module: product_category_extended
 #: field:product.category,sale_taxes_ids:0
