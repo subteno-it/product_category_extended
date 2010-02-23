@@ -10,7 +10,7 @@
             <field name="model">product.product</field>
             <field name="type">form</field>
             <field name="priority" eval="18"/>
-            <field name="inherit_id" ref="product_ihm.syleam_product_normal_form_view"/>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
             <field name="arch" type="xml">
 
                 <xpath expr="/form/notebook/page/group/field[@name='categ_id']" position="replace">
@@ -32,7 +32,7 @@
             <field name="model">product.category</field>
             <field name="type">form</field>
             <field name="priority" eval="10"/>
-            <field name="inherit_id" ref="product_ihm.syleam_product_category_form_view"/>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="/form/field[@name='sequence']" position="replace">
                     <notebook colspan="4">
@@ -57,7 +57,7 @@
             <field name="model">product.category</field>
             <field name="type">form</field>
             <field name="priority" eval="14"/>
-            <field name="inherit_id" ref="product_ihm.syleam_product_category_form_view"/>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="/form/notebook" position="inside">
                     <page string="Accounting">
@@ -80,7 +80,7 @@
             <field name="model">product.category</field>
             <field name="type">form</field>
             <field name="priority" eval="16"/>
-            <field name="inherit_id" ref="product_ihm.syleam_product_category_form_view"/>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="/form/notebook/page[@string='Accounting']" position="inside">
                     <group col="2" colspan="2">
@@ -100,7 +100,7 @@
             <field name="model">product.category</field>
             <field name="type">form</field>
             <field name="priority" eval="20"/>
-            <field name="inherit_id" ref="product_ihm.syleam_product_category_form_view"/>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
             <field name="arch" type="xml">
 
                 <xpath expr="/form/notebook/page[@string='Accounting']" position="inside">
@@ -123,7 +123,7 @@
             <field name="model">product.category</field>
             <field name="type">form</field>
             <field name="priority" eval="20"/>
-            <field name="inherit_id" ref="product_ihm.syleam_product_category_form_view"/>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
             <field name="arch" type="xml">
 
                 <xpath expr="/form/notebook/page[@string='General']" position="inside">

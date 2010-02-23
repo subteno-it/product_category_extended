@@ -33,7 +33,6 @@
     'author': 'Syleam',
     'depends': [
         'product',
-        'product_ihm',
         'stock',
         'account',
     ],
