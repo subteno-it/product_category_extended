@@ -50,6 +50,9 @@ class product_product(osv.osv):
         """
         When category changes, we search for taxes, UOM and product type
         """
+        if context is None:
+            context = self.pool.get('res.users').context_get(cr, uid, context=context)
+
         res = {}
         warn = False
 
