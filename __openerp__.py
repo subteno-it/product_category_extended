@@ -4,6 +4,7 @@
 #    product_category_extended module for OpenERP, Add onchange on product category to fill sale and purchase taxes and uom on product
 #    Copyright (C) 2011 SYLEAM Info Services (<http://www.Syleam.fr/>)
 #              Sylvain Garancher <sylvain.garancher@syleam.fr>
+#              Sebastien LANGE <sebastien.lange@syleam.fr>
 #
 #    This file is a part of product_category_extended
 #
@@ -38,8 +39,7 @@
     'images': [],
     'update_xml': [
         #'security/ir.model.access.csv',
-        #'wizard/wizard.xml',
-        'product_product_view.xml',
+        'product_view.xml',
     ],
     'demo_xml': [],
     'test': [],
