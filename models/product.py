@@ -22,75 +22,40 @@
 #
 ##############################################################################
 
-from osv import osv
-from osv import fields
-from tools.translate import _
+from openerp import models, fields, api
 
 
-class product_category(osv.osv):
+class product_category(models.Model):
     _inherit = 'product.category'
 
-    _columns = {
-        'sale_taxes_ids': fields.many2many('account.tax', 'product_cat_tax_cust_rel', 'cat_id', 'tax_id', 'Sale Taxes', domain=[('parent_id', '=', False), ('type_tax_use', 'in', ['sale', 'all'])], help='Taxes applied on sale orders'),
-        'purchase_taxes_ids': fields.many2many('account.tax', 'product_cat_tax_supp_rel', 'cat_id', 'tax_id', 'Purchase Taxes', domain=[('parent_id', '=', False), ('type_tax_use', 'in', ['purchase', 'all'])], help='Taxes applied on purchase orders'),
-        'uom_id': fields.many2one('product.uom', 'Default UoM', help='Default Unit of Measure'),
-        'uom_po_id': fields.many2one('product.uom', 'Purchase UoM', help='Unit of Measure for purchase'),
-        'uos_id': fields.many2one('product.uom', 'Unit of Sale', help='See product definition'),
-        'uos_coef': fields.float('UOM -> UOS coef', digits=(16,4), help='See product definition'),
-    }
-
-product_category()
+    sale_taxes_ids = fields.Many2many('account.tax', 'product_cat_tax_cust_rel', 'cat_id', 'tax_id', String='Sale Taxes', domain=[('parent_id', '=', False), ('type_tax_use', 'in', ['sale', 'all'])], help='Taxes applied on sale orders')
+    purchase_taxes_ids = fields.Many2many('account.tax', 'product_cat_tax_supp_rel', 'cat_id', 'tax_id', 'Purchase Taxes', domain=[('parent_id', '=', False), ('type_tax_use', 'in', ['purchase', 'all'])], help='Taxes applied on purchase orders')
+    uom_id = fields.Many2one('product.uom', 'Default UoM', help='Default Unit of Measure')
+    uom_po_id = fields.Many2one('product.uom', 'Purchase UoM', help='Unit of Measure for purchase')
+    uos_id = fields.Many2one('product.uom', 'Unit of Sale', help='See product definition')
+    uos_coef = fields.Float('UOM -> UOS coef', digits=(16, 4), help='See product definition')
 
 
-
-class product_product(osv.osv):
+class product_product(models.Model):
     _inherit = 'product.product'
 
-    def onchange_category(self, cr, uid, ids, category_id, context=None):
+    @api.onchange('categ_id')
+    def onchange_category(self):
         """
         When category changes, we search for taxes, UOM and product type
         """
-        if context is None:
-            context = self.pool.get('res.users').context_get(cr, uid, context=context)
 
-        res = {}
-        warn = False
+        self.uom_id = False
+        self.uom_po_id = False
+        self.taxes_id = []
+        self.supplier_taxes_id = []
 
-        if not category_id:
-            res = {
-                'categ_id': False,
-                'uom_id': False,
-                'uom_po_id': False,
-                'taxes_id': [],
-                'supplier_taxes_id': [],
-            }
-        else:
-            # Search for the default value on this category
-            category_data = self.pool.get('product.category').read(cr, uid, category_id, [], context=context)
-            res['categ_id'] = category_id
-            if category_data['sale_taxes_ids']:
-                res['taxes_id'] = category_data['sale_taxes_ids']
-            if category_data['purchase_taxes_ids']:
-                res['supplier_taxes_id'] = category_data['purchase_taxes_ids']
-            if category_data['uom_id']:
-                res['uom_id'] = category_data['uom_id']
-            if category_data['uom_po_id']:
-                res['uom_po_id'] = category_data['uom_po_id']
-            if category_data['uos_id']:
-                res['uos_id'] = category_data['uos_id']
-                res['uos_coef'] = category_data['uos_coef']
+        self.taxes_id = self.categ_id.sale_taxes_ids
+        self.supplier_taxes_id = self.categ_id.purchase_taxes_ids
+        self.uom_id = self.categ_id.uom_id
+        self.uom_po_id = self.categ_id.uom_po_id
+        self.uos_id = self.categ_id.uos_id
+        self.uos_coef = self.categ_id.uos_coef
 
-            if ids:
-                warn = {
-                    'title': _('Caution'),
-                    'message': _("""The product category has changed, thanks to control :
-* Sale and Purchase taxes
-* Unit sale and stock
-* The price with return unit"""),
-                }
-
-        return {'value': res, 'warning': warn}
-
-product_product()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
