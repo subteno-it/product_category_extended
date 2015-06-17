@@ -5,6 +5,7 @@
 #    Copyright (C) 2011 SYLEAM Info Services (<http://www.Syleam.fr/>)
 #              Sylvain Garancher <sylvain.garancher@syleam.fr>
 #              Sebastien LANGE <sebastien.lange@syleam.fr>
+#              Alexandre Moreau <alexnadre.moreau@syleam.fr>
 #
 #    This file is a part of product_category_extended
 #
@@ -38,12 +39,10 @@
     'init_xml': [],
     'images': [],
     'update_xml': [
-        #'security/ir.model.access.csv',
-        'product_view.xml',
+        'views/product.xml',
     ],
     'demo_xml': [],
     'test': [],
-    #'external_dependancies': {'python': ['kombu'], 'bin': ['which']},
     'installable': True,
     'active': False,
     'license': 'AGPL-3',
