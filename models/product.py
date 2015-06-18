@@ -28,8 +28,12 @@ from openerp import models, fields, api
 class product_category(models.Model):
     _inherit = 'product.category'
 
-    sale_taxes_ids = fields.Many2many('account.tax', 'product_cat_tax_cust_rel', 'cat_id', 'tax_id', String='Sale Taxes', domain=[('parent_id', '=', False), ('type_tax_use', 'in', ['sale', 'all'])], help='Taxes applied on sale orders')
-    purchase_taxes_ids = fields.Many2many('account.tax', 'product_cat_tax_supp_rel', 'cat_id', 'tax_id', 'Purchase Taxes', domain=[('parent_id', '=', False), ('type_tax_use', 'in', ['purchase', 'all'])], help='Taxes applied on purchase orders')
+    sale_taxes_ids = fields.Many2many('account.tax', 'product_cat_tax_cust_rel', 'cat_id', 'tax_id', 'Sale Taxes',
+                                      domain=[('parent_id', '=', False), ('type_tax_use', 'in', ['sale', 'all'])],
+                                      help='Taxes applied on sale orders')
+    purchase_taxes_ids = fields.Many2many('account.tax', 'product_cat_tax_supp_rel', 'cat_id', 'tax_id', 'Purchase Taxes',
+                                          domain=[('parent_id', '=', False), ('type_tax_use', 'in', ['purchase', 'all'])],
+                                          help='Taxes applied on purchase orders')
     uom_id = fields.Many2one('product.uom', 'Default UoM', help='Default Unit of Measure')
     uom_po_id = fields.Many2one('product.uom', 'Purchase UoM', help='Unit of Measure for purchase')
     uos_id = fields.Many2one('product.uom', 'Unit of Sale', help='See product definition')
