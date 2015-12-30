@@ -25,9 +25,9 @@
 
 {
     'name': 'Product Category Extended',
-    'version': '1.0',
-    'category': 'Generic Modules/Inventory Control',
-    'description': """Add onchange on product category to fill sale and purchase taxes and uom on product""",
+    'version': '9.0.1.0.0',
+    'category': 'Inventory Management',
+    'summary': """Add onchange on product category to fill sale and purchase taxes and uom on product""",
     'author': 'SYLEAM',
     'website': 'http://www.syleam.fr/',
     'depends': [
@@ -35,17 +35,13 @@
         'stock',
         'account',
     ],
-    'init_xml': [],
     'images': [],
-    'update_xml': [
-        #'security/ir.model.access.csv',
+    'data': [
         'product_view.xml',
     ],
-    'demo_xml': [],
     'test': [],
-    #'external_dependancies': {'python': ['kombu'], 'bin': ['which']},
+    'auto_install': False,
     'installable': True,
-    'active': False,
     'license': 'AGPL-3',
 }
 

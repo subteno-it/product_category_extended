@@ -6,6 +6,8 @@
         #    product_category_extended module for OpenERP, Add onchange on product category to fill sale and purchase taxes and uom on product
         #    Copyright (C) 2011 SYLEAM Info Services ([http://www.Syleam.fr/]) 
         #              Sylvain Garancher [sylvain.garancher@syleam.fr]
+        #    Copyright (C) 2015 SYLEAM Info Services ([http://www.Syleam.fr/]) 
+        #              Sebastien LANGE [sebastien.lange@syleam.fr]
         #
         #    This file is a part of product_category_extended
         #
@@ -24,35 +26,18 @@
         #
         ##############################################################################
 
-        <record id="view_product_product_form" model="ir.ui.view">
-            <field name="name">product.product.form</field>
-            <field name="model">product.product</field>
-            <field name="type">form</field>
-            <field name="priority" eval="16"/>
-            <field name="inherit_id" ref="product.product_normal_form_view"/>
-            <field name="arch" type="xml">
-                <xpath expr="/form/notebook/page/group/field[@name='categ_id']" position="attributes">
-                    <attribute name="on_change">onchange_category(categ_id)</attribute>
-                </xpath>
-            </field>
-        </record>
 
         <record id="view_product_category_form" model="ir.ui.view">
             <field name="name">product.category.form</field>
             <field name="model">product.category</field>
-            <field name="type">form</field>
-            <field name="priority" eval="24"/>
             <field name="inherit_id" ref="product.product_category_form_view"/>
             <field name="arch" type="xml">
-                <data>
-                    <xpath expr="/form/group/field[@name='property_account_expense_categ']" position="after">
-                        <separator string="Sale taxes" colspan="4"/>
-                        <field name="sale_taxes_ids" nolabel="1" colspan="4"/>
-                        <separator string="Purchase taxes" colspan="4"/>
-                        <field name="purchase_taxes_ids" nolabel="1" colspan="4"/>
-                    </xpath>
-                    <xpath expr="/form/group/field[@name='property_stock_journal']" position="after">
-                        <group colspan="2" col="2">
+                <xpath expr="//group[@name='first']" position="after">
+                        <group >
+                            <separator string="Sale taxes" colspan="4"/>
+                            <field name="taxes_id" nolabel="1" colspan="4"/>
+                            <separator string="Purchase taxes" colspan="4"/>
+                            <field name="supplier_taxes_id" nolabel="1" colspan="4"/>
                             <separator string="Sale and Purchase Units (UoM)" colspan="4"/>
                             <field name="uom_id"/>
                             <field name="uom_po_id"/>
@@ -60,8 +45,7 @@
                             <field name="uos_id"/>
                             <field name="uos_coef"/>
                         </group>
-                    </xpath>
-                </data>
+                </xpath>
             </field>
         </record>
 

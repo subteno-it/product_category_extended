@@ -4,6 +4,8 @@
 #    product_category_extended module for OpenERP, Add onchange on product category to fill sale and purchase taxes and uom on product
 #    Copyright (C) 2011 SYLEAM Info Services (<http://www.Syleam.fr/>)
 #              Sylvain Garancher <sylvain.garancher@syleam.fr>
+#    Copyright (C) 2015 SYLEAM Info Services (<http://www.Syleam.fr/>)
+#              Sebastien LANGE <sebastien.lange@syleam.fr>
 #
 #    This file is a part of product_category_extended
 #
@@ -22,75 +24,58 @@
 #
 ##############################################################################
 
-from osv import osv
-from osv import fields
-from tools.translate import _
+from openerp.tools.translate import _
+from openerp import models, api, fields
 
 
-class product_category(osv.osv):
+class ProductCategory(models.Model):
     _inherit = 'product.category'
 
-    _columns = {
-        'sale_taxes_ids': fields.many2many('account.tax', 'product_cat_tax_cust_rel', 'cat_id', 'tax_id', 'Sale Taxes', domain=[('parent_id', '=', False), ('type_tax_use', 'in', ['sale', 'all'])], help='Taxes applied on sale orders'),
-        'purchase_taxes_ids': fields.many2many('account.tax', 'product_cat_tax_supp_rel', 'cat_id', 'tax_id', 'Purchase Taxes', domain=[('parent_id', '=', False), ('type_tax_use', 'in', ['purchase', 'all'])], help='Taxes applied on purchase orders'),
-        'uom_id': fields.many2one('product.uom', 'Default UoM', help='Default Unit of Measure'),
-        'uom_po_id': fields.many2one('product.uom', 'Purchase UoM', help='Unit of Measure for purchase'),
-        'uos_id': fields.many2one('product.uom', 'Unit of Sale', help='See product definition'),
-        'uos_coef': fields.float('UOM -> UOS coef', digits=(16,4), help='See product definition'),
-    }
-
-product_category()
+    taxes_id = fields.Many2many(comodel_name='account.tax', string='Customer Taxes', domain=[('type_tax_use', '=', 'sale')])
+    supplier_taxes_id = fields.Many2many(comodel_name='account.tax', string='Vendor Taxes', domain=[('type_tax_use', '=', 'purchase')])
+    uom_id = fields.Many2one(comodel_name='product.uom', string='Default UoM', help='Default Unit of Measure')
+    uom_po_id = fields.Many2one(comodel_name='product.uom', string='Purchase UoM', help='Unit of Measure for purchase')
+    uos_id = fields.Many2one(comodel_name='product.uom', string='Unit of Sale', help='See product definition')
+    uos_coef = fields.Float(string='UOM -> UOS coef', digits=(16, 4), help='See product definition')
 
 
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
 
-class product_product(osv.osv):
-    _inherit = 'product.product'
-
-    def onchange_category(self, cr, uid, ids, category_id, context=None):
+    @api.onchange('categ_id')
+    def _onchange_categ_id(self):
         """
         When category changes, we search for taxes, UOM and product type
         """
-        if context is None:
-            context = self.pool.get('res.users').context_get(cr, uid, context=context)
-
-        res = {}
         warn = False
 
-        if not category_id:
-            res = {
-                'categ_id': False,
-                'uom_id': False,
-                'uom_po_id': False,
-                'taxes_id': [],
-                'supplier_taxes_id': [],
-            }
+        if not self.categ_id:
+            self.categ_id = False
+            self.uom_id = False
+            self.uom_po_id = False
+            self.taxes_id = []
+            self.supplier_taxes_id = []
         else:
             # Search for the default value on this category
-            category_data = self.pool.get('product.category').read(cr, uid, category_id, [], context=context)
-            res['categ_id'] = category_id
-            if category_data['sale_taxes_ids']:
-                res['taxes_id'] = category_data['sale_taxes_ids']
-            if category_data['purchase_taxes_ids']:
-                res['supplier_taxes_id'] = category_data['purchase_taxes_ids']
-            if category_data['uom_id']:
-                res['uom_id'] = category_data['uom_id']
-            if category_data['uom_po_id']:
-                res['uom_po_id'] = category_data['uom_po_id']
-            if category_data['uos_id']:
-                res['uos_id'] = category_data['uos_id']
-                res['uos_coef'] = category_data['uos_coef']
+            if self.categ_id.taxes_id:
+                self.taxes_id = self.categ_id.taxes_id
+            if self.categ_id.supplier_taxes_id:
+                self.supplier_taxes_id = self.categ_id.supplier_taxes_id
+            if self.categ_id.uom_id:
+                self.uom_id = self.categ_id.uom_id
+            if self.categ_id.uom_po_id:
+                self.uom_po_id = self.categ_id.uom_po_id
+            if self.categ_id.uos_id:
+                self.uos_id = self.categ_id.uos_id
+                self.uos_coef = self.categ_id.uos_coef
+            warn = {
+                'title': _('Caution'),
+                'message': _("""The product category has changed, thanks to control :
+    * Sale and Purchase taxes
+    * Unit sale and stock
+    * The price with return unit"""),
+            }
+        return {'warning': warn}
 
-            if ids:
-                warn = {
-                    'title': _('Caution'),
-                    'message': _("""The product category has changed, thanks to control :
-* Sale and Purchase taxes
-* Unit sale and stock
-* The price with return unit"""),
-                }
-
-        return {'value': res, 'warning': warn}
-
-product_product()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
