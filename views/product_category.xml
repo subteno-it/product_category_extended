@@ -33,21 +33,20 @@
             <field name="inherit_id" ref="product.product_category_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//group[@name='first']" position="after">
-                        <group >
-                            <separator string="Sale taxes" colspan="4"/>
-                            <field name="taxes_id" nolabel="1" colspan="4"/>
-                            <separator string="Purchase taxes" colspan="4"/>
-                            <field name="supplier_taxes_id" nolabel="1" colspan="4"/>
-                            <separator string="Sale and Purchase Units (UoM)" colspan="4"/>
-                            <field name="uom_id"/>
-                            <field name="uom_po_id"/>
-                            <separator string="Secondary Unit (UoS)" colspan="4"/>
-                            <field name="uos_id"/>
-                            <field name="uos_coef"/>
-                        </group>
+                    <group>
+                        <separator string="Sale taxes" colspan="4"/>
+                        <field name="taxes_id" nolabel="1" colspan="4"/>
+                        <separator string="Purchase taxes" colspan="4"/>
+                        <field name="supplier_taxes_id" nolabel="1" colspan="4"/>
+                        <separator string="Sale and Purchase Units (UoM)" colspan="4"/>
+                        <field name="uom_id"/>
+                        <field name="uom_po_id"/>
+                        <separator string="Secondary Unit (UoS)" colspan="4"/>
+                        <field name="uos_id"/>
+                        <field name="uos_coef"/>
+                    </group>
                 </xpath>
             </field>
         </record>
-
     </data>
 </openerp>

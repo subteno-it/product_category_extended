@@ -24,8 +24,7 @@
 #
 ##############################################################################
 
-from openerp.tools.translate import _
-from openerp import models, api, fields
+from openerp import models, fields
 
 
 class ProductCategory(models.Model):
@@ -37,45 +36,5 @@ class ProductCategory(models.Model):
     uom_po_id = fields.Many2one(comodel_name='product.uom', string='Purchase UoM', help='Unit of Measure for purchase')
     uos_id = fields.Many2one(comodel_name='product.uom', string='Unit of Sale', help='See product definition')
     uos_coef = fields.Float(string='UOM -> UOS coef', digits=(16, 4), help='See product definition')
-
-
-class ProductTemplate(models.Model):
-    _inherit = 'product.template'
-
-    @api.onchange('categ_id')
-    def _onchange_categ_id(self):
-        """
-        When category changes, we search for taxes, UOM and product type
-        """
-        warn = False
-
-        if not self.categ_id:
-            self.categ_id = False
-            self.uom_id = False
-            self.uom_po_id = False
-            self.taxes_id = []
-            self.supplier_taxes_id = []
-        else:
-            # Search for the default value on this category
-            if self.categ_id.taxes_id:
-                self.taxes_id = self.categ_id.taxes_id
-            if self.categ_id.supplier_taxes_id:
-                self.supplier_taxes_id = self.categ_id.supplier_taxes_id
-            if self.categ_id.uom_id:
-                self.uom_id = self.categ_id.uom_id
-            if self.categ_id.uom_po_id:
-                self.uom_po_id = self.categ_id.uom_po_id
-            if self.categ_id.uos_id:
-                self.uos_id = self.categ_id.uos_id
-                self.uos_coef = self.categ_id.uos_coef
-            warn = {
-                'title': _('Caution'),
-                'message': _("""The product category has changed, thanks to control :
-    * Sale and Purchase taxes
-    * Unit sale and stock
-    * The price with return unit"""),
-            }
-        return {'warning': warn}
-
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
