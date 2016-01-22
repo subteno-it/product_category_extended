@@ -35,7 +35,7 @@
                 <xpath expr="//group[@name='first']" position="after">
                     <group>
                         <separator string="Sale taxes" colspan="4"/>
-                        <field name="taxes_id" nolabel="1" colspan="4"/>
+                        <field name="sale_taxes_id" nolabel="1" colspan="4"/>
                         <separator string="Purchase taxes" colspan="4"/>
                         <field name="supplier_taxes_id" nolabel="1" colspan="4"/>
                         <separator string="Sale and Purchase Units (UoM)" colspan="4"/>
