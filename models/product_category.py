@@ -30,8 +30,8 @@ from openerp import models, fields
 class ProductCategory(models.Model):
     _inherit = 'product.category'
 
-    taxes_id = fields.Many2many(comodel_name='account.tax', string='Customer Taxes', domain=[('type_tax_use', '=', 'sale')])
-    supplier_taxes_id = fields.Many2many(comodel_name='account.tax', string='Vendor Taxes', domain=[('type_tax_use', '=', 'purchase')])
+    sale_taxes_id = fields.Many2many(comodel_name='account.tax', relation='product_cat_tax_cust_rel', column1='cat_id', column2='tax_id', string='Customer Taxes', domain=[('type_tax_use', '=', 'sale')])
+    supplier_taxes_id = fields.Many2many(comodel_name='account.tax', relation='product_cat_tax_supp_rel', column1='cat_id', column2='tax_id', string='Vendor Taxes', domain=[('type_tax_use', '=', 'purchase')])
     uom_id = fields.Many2one(comodel_name='product.uom', string='Default UoM', help='Default Unit of Measure')
     uom_po_id = fields.Many2one(comodel_name='product.uom', string='Purchase UoM', help='Unit of Measure for purchase')
     uos_id = fields.Many2one(comodel_name='product.uom', string='Unit of Sale', help='See product definition')
